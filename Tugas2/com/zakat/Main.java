@@ -1,10 +1,11 @@
 package com.zakat;
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
-            double hargaBeras = 12000;   // Harga default beras per kilogram (misal)
+            double hargaBeras = 12000;
 
             System.out.println("Gunakan harga default untuk beras?");
             System.out.println("1. Ya (Beras: Rp12.000/kg)");
@@ -21,27 +22,35 @@ public class Main {
             System.out.print("Pilihan (1/2/3): ");
             int pilihan = scanner.nextInt();
 
-            ZakatInterface zakat = switch (pilihan) {
+            ZakatInterface zakat = null;
+
+            switch (pilihan) {
                 case 1 -> {
+                    ZakatMal zakatMal = new ZakatMal();
                     System.out.print("Total harta: ");
-                    yield new ZakatMal(scanner.nextDouble());
+                    zakatMal.setTotalHarta(scanner.nextDouble());
+                    zakat = zakatMal;
                 }
                 case 2 -> {
+                    ZakatPenghasilan zakatPenghasilan = new ZakatPenghasilan();
                     System.out.print("Penghasilan bulanan: ");
-                    yield new ZakatPenghasilan(scanner.nextDouble());
+                    zakatPenghasilan.setPenghasilanBulanan(scanner.nextDouble());
+                    zakat = zakatPenghasilan;
                 }
                 case 3 -> {
+                    ZakatFitrah zakatFitrah = new ZakatFitrah();
                     System.out.print("Jumlah anggota keluarga: ");
-                    yield new ZakatFitrah(scanner.nextInt(), hargaBeras);
+                    zakatFitrah.setJumlahAnggotaKeluarga(scanner.nextInt());
+                    zakatFitrah.setHargaBeras(hargaBeras);
+                    zakat = zakatFitrah;
                 }
-                default -> null;
-            };
+                default -> System.out.println("Pilihan tidak valid.");
+            }
 
             if (zakat != null) {
                 System.out.printf("Jumlah zakat yang harus dibayar: %.2f\n", zakat.hitungZakat());
-            } else {
-                System.out.println("Pilihan tidak valid.");
             }
         }
     }
 }
+
