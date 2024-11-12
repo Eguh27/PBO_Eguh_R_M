@@ -6,42 +6,61 @@ public interface ZakatInterface {
 }
 
 class ZakatMal implements ZakatInterface {
-    private final double totalHarta;
+    private double totalHarta;
 
-    public ZakatMal(double totalHarta) {
+    public double getTotalHarta() {
+        return totalHarta;
+    }
+
+    public void setTotalHarta(double totalHarta) {
         this.totalHarta = totalHarta;
     }
 
     @Override
     public double hitungZakat() {
-        return totalHarta * 0.025; // Menghitung zakat mal tanpa mempertimbangkan nisab
+        return totalHarta * 0.025;
     }
 }
 
 class ZakatPenghasilan implements ZakatInterface {
-    private final double penghasilanBulanan;
+    private double penghasilanBulanan;
 
-    public ZakatPenghasilan(double penghasilanBulanan) {
+    public double getPenghasilanBulanan() {
+        return penghasilanBulanan;
+    }
+
+    public void setPenghasilanBulanan(double penghasilanBulanan) {
         this.penghasilanBulanan = penghasilanBulanan;
     }
 
     @Override
     public double hitungZakat() {
-        return penghasilanBulanan * 0.025; // Menghitung zakat penghasilan tanpa mempertimbangkan nisab
+        return penghasilanBulanan * 0.025;
     }
 }
 
 class ZakatFitrah implements ZakatInterface {
-    private final int jumlahAnggotaKeluarga;
-    private final double hargaBeras;
+    private int jumlahAnggotaKeluarga;
+    private double hargaBeras;
 
-    public ZakatFitrah(int jumlahAnggotaKeluarga, double hargaBeras) {
+    public int getJumlahAnggotaKeluarga() {
+        return jumlahAnggotaKeluarga;
+    }
+
+    public void setJumlahAnggotaKeluarga(int jumlahAnggotaKeluarga) {
         this.jumlahAnggotaKeluarga = jumlahAnggotaKeluarga;
+    }
+
+    public double getHargaBeras() {
+        return hargaBeras;
+    }
+
+    public void setHargaBeras(double hargaBeras) {
         this.hargaBeras = hargaBeras;
     }
 
     @Override
     public double hitungZakat() {
-        return jumlahAnggotaKeluarga * hargaBeras * 2.5; // Menghitung zakat fitrah berdasarkan jumlah anggota keluarga
+        return jumlahAnggotaKeluarga * hargaBeras * 2.5;
     }
 }
