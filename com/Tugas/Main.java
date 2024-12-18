@@ -37,7 +37,7 @@ public class Main {
             System.out.println("4. Keluar");
             System.out.print("Pilih : ");
             a = pilih.nextInt();
-            pilih.nextLine(); // Membersihkan karakter newline setelah nextInt
+            pilih.nextLine();
 
             if (a == 1) {
                 // Tambah Matkul
